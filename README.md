@@ -18,14 +18,14 @@ MovieLens Dataset (Recommendation System)
 - Decision trees
 - SVM
 - Naive Bayes
-- Neural Networks
+- Neural Networks \
 *(2 of those)*
 
 ### Advanced Technique
 - Association Rules
 - Clustering (k-means)
 - Recommendation system
-- Graph analysis (PageRank)
+- Graph analysis (PageRank) \
 *(1 of those)*
 
 ### Big Data Approach (? bonus)
