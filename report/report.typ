@@ -34,9 +34,11 @@
 #pagebreak()
 
 #show heading.where(level: 1): set text(size: 26pt)
+#show heading.where(level: 2): set text(size: 22pt)
 
-= Data Set
+= Dataset
 
+== Περιγραφή dataset
 #set text(size: 16pt)
 #par[
   Χρησιμοποιήσαμε το MovieLens Dataset με 20 data entries. Το dataset χωρίζεται
@@ -45,13 +47,6 @@
   ανεβαίνουν με μη σταθερό ρυθμό, αρχίζοντας να αυξάνονται κατά 1 και στην
   συνέχεια αυξάνονται κατά τυχαίο αριθμό.
 ]
-
-Στατιστικά (Πλήθος μοναδικών entries):
-- movieId: 27.278
-- userId: 138.493
-- rating: 20.000.263
-- tag: 38.642
-- genre: 1.342
 
 + *movie* #par[
     Υπάρχουν τίτλοι (title) ταινιών ξεκινώντας από το 1995 μέχρι το 2015.
@@ -101,13 +96,28 @@
   ]
   #align(center)[
     #image("images/genome_scoreTable.png", width: 70%)
-  ]
+  ] \
 
-#par[
-  Οι σχέσεις μεταξύ των πινάκων φαίνονται στην παρακάτω εικόνα
-]
+- Οι σχέσεις μεταξύ των πινάκων φαίνονται στην παρακάτω εικόνα \
 
 #align(center)[
-  #image("../ER2.drawio.png", width: 100%)
+  #image("images/tablesER.png", width: 110%)
 ]
 
+#pagebreak()
+
+== Περιγραφή εγγραφών του Dataset
+
+Πλήθος μοναδικών εγγραφών στο αρχικό dataset:
+- movieId: 27.278
+- userId: 138.493
+- rating: 20.000.263
+- tag: 38.642
+- genre: 1.342
+
+Πλήθος μοναδικών εγγραφών μετά από Processing:
+- movieId: 27.262
+- userId: 138.493
+- rating: 20.000.263
+- tag: 38.642
+- genre: 1.342
