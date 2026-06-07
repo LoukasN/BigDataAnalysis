@@ -33,6 +33,12 @@
 
 #pagebreak()
 
+#set text(size: 18pt)
+#set page(numbering: "1")
+#outline(title: "Περιεχόμενα")
+
+#pagebreak()
+
 #show heading.where(level: 1): set text(size: 26pt)
 #show heading.where(level: 2): set text(size: 22pt)
 
@@ -108,7 +114,7 @@
 
 == Περιγραφή εγγραφών του Dataset
 
-Πλήθος μοναδικών εγγραφών στο αρχικό dataset:
+Πλήθος εγγραφών στο αρχικό dataset:
 - movieId: 27.278
 - userId: 138.493
 - rating: 20.000.263
@@ -121,3 +127,27 @@
 - rating: 20.000.263
 - tag: 38.642
 - genre: 1.342
+
+#par[
+  Στο processing του movie βγάλαμε τις διπλότυπες εγγραφές κρατώντας μόνο την πρώτη,
+  στην συνέχεια ενημερώσαμε τα rating ώστε τα διπλά movieIds να δείχνουν μόνο
+  στην εγγραφή που κρατήθηκε στο movie.
+]
+
+#par[
+  Κρατήσαμε μόνο τα αρχεία movie και rating, καθώς μόνο αυτα ...
+]
+\
+(Insert Thing Here)
+\
+
+= Διερευνητική ανάλυση δεδομένων
+
+== Στατιστικά & Visualization
+
+Η παρακάτω εικόνα δείχνει το συνολικό μέσο rating προς τον αριθμό των
+συνολικών rating.
+
+#align(center)[
+  #image("images/avg_movie_rating.png", width: 120%)
+]

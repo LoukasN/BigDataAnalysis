@@ -1,4 +1,4 @@
-# BIGDataANALysis project
+# Big Data Analysis Project
 Hell yeah
 
 ## Dataset
