@@ -57,7 +57,7 @@
 + *movie* #par[
     Υπάρχουν τίτλοι (title) ταινιών ξεκινώντας από το 1891 μέχρι το 2015.
     Το κάθε entry έχει και το είδος ή είδη (genres) όπως Drama, Comedy, etc
-    με 246 να έχουν (no genres) για είδος (genres).
+    με 246 να έχουν (no genres listed) για είδος (genres).
   ]
   #align(center)[
     #image("images/moviesTable.png", width: 110%)
