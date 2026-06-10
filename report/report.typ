@@ -248,7 +248,7 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
 ]
 
 #align(center)[
-  #image("images/decisionTree.png", width: 120%)
+  #image("images/decisionTree.png", width: 100%)
 ]
 
 #par[
@@ -261,3 +261,24 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
 ]
 
 === Neural Network
+
+#par[
+  Το Νευρωνικό δίκτυο είναι ένα μαύρο κουτί. Δώσαμε rating_count, genre_count, τα
+  genres και το release_year. Ως στόχο έχει να υπολογίσει το rating_class όπως και
+  το δέντρο παραπάνω. Έτσι, δημιουργήθηκε ένα νευρωνικό δίκτυο, με 100 κρυφούς
+  νευρώνες, activation ReLU και ο αλγόριθμος βελτιστοποίησης Adam, με μέγιστο
+  αριθμό επαναλήψεων τους 200.
+]
+
+== Advanced Technique
+
+=== Association Rules
+
+#par[
+  Η τεχνική του Association Rules υλοποιήθηκε με την χρήση της python βιβλιοθήκης
+  Associate. Περάσαμε τα genres από ένα python script που για κάθε είδος ταινίας
+  που το περιέχει βάζει "yes". Στην συνέχεια εντοπίσαμε τους πιο συχνούς συνδυασμούς
+  ειδών που υπήρχαν μεταξύ των ταινιών, για να δημιουργήσουμε κανόνες.
+  Δημιουργούνται κανόνες (association rules) μεταξύ των genres και εντοπίζει αυτά 
+  που έχουν περισσότερες κοινές ταινίες.
+]
