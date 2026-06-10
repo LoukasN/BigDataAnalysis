@@ -41,6 +41,7 @@
 
 #show heading.where(level: 1): set text(size: 20pt)
 #show heading.where(level: 2): set text(size: 18pt)
+#show heading.where(level: 3): set text(size: 16pt)
 
 #set text(size: 14pt)
 = Dataset
@@ -158,7 +159,7 @@
 - #par[
     Τα βήματα του Cleaning και του Feature engineering έγιναν παράλληλα καθώς
     με την δημιουργία καινούργιων feature βρίσκαμε πως κάποιες εγγραφές ήταν
-    ελλειπή.
+    ελλειπής.
   ]
 
 - #par[
@@ -176,3 +177,87 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
 = Διερευνητική ανάλυση δεδομένων
 
 == Στατιστικά & Visualization
+
+Τα διαγράμματα που ακολουθούν είναι μια αναπαράσταση των στατιστικών δεδομένων
+του dataset.
+
+#align(center)[
+  #image("images/scatterRatingPerYear.png", width: 120%)
+]
+
+#list[
+  Το παραπάνω διάγραμμα scatterplot δείχνει την μέση αξιολόγηση κάθε ταινίας προς
+  τον χρόνο που κυκλοφόρησε. Για κάθε δεκαετία μετά το 1950 δίνετε διαφορετικό
+  χρώμα.
+]
+
+#pagebreak()
+
+#align(center)[
+  #image("images/avgMovieRatingGraph.png", width: 100%)
+]
+
+#list[
+  Εδώ φαίνεται το πλήθος των αξιολογήσεων που έχουν δοθεί.
+]
+
+#align(center)[
+  #image("images/moviesPerGenreBar.png", width: 120%)
+]
+
+#list[
+  Σε αυτό το διάγραμμα φαίνεται το πλήθος των ταινιών που ανήκουν σε κάθε είδος.
+]
+
+#align(center)[
+  #image("images/avgRatingPerGenre.png", width: 120%)
+]
+
+#list[
+  Το παραπάνω διάγραμμα δείχνει την μέση αξιολόγηση των ταινιών που ανήκουν σε
+  κάθε είδος.
+]
+
+= Εφαρμογή Αλγορίθμων
+
+#par[
+  Για Classification models χρησιμοποιήθηκε το Decision Tree και το Neural
+  Network. Για advance technique χρησιμοποιήθηκε [To be continued].
+]
+
+== Classification Models
+
+=== Decision Tree
+
+#let ratingLow = $0 <= "avg_movie_rating" < 3$
+#let ratingMid = $3 <= "avg_movie_rating" < 4$
+#let ratingHigh = $4 <="avg_movie_rating" <= 5$
+
+#par[
+  Για το Decision Tree χρειάστηκε να διαχωρίσουμε τις ταινίες με βάση την μέση
+  αξιολόγηση τους. Οι ταινίες χαρακτηρίστηκαν :\
+  'Low' για #ratingLow, \
+  'Medium' για #ratingMid, \
+  'High' για #ratingHigh.\
+  Επομένως προσθέσαμε στον πίνακα την νέα στήλη rating_class. Στην συνέχεια
+  χρησιμοποιήσαμε το rating_class ως target του Decision Tree, κρύψαμε την μέση
+  αξιολόγηση κάθε ταινίας και (avg_movie_rating) και την απόκλιση των
+  αξιολογήσεων (rating_std). Επομένως, δημιουργήθηκε ένα Decision Tree που
+  προσπαθεί να προβλέψει αν μια ταινία θα χαρακτηρίζεται ως Low, Medium ή High,
+  μόνο από τα genres, rating_count, genre_count και release_year.
+]
+
+#align(center)[
+  #image("images/decisionTree.png", width: 120%)
+]
+
+#par[
+  Στην εικόνα φαίνεται ένα κομμάτι του δέντρου. Κάθε φύλλο αντιστοιχεί στην
+  κατηγορία στην οποία κατατάσσεται μια ταινία με βάση τα κριτήρια στο οποία
+  περνάει στα πιο πάνω επίπεδα. Το ποσοστό σε κάθε φύλλο δίνει εμπιστοσύνη της
+  πρόβλεψης για αυτή την κατηγοριοποίηση. Αν το χρώμα είναι κόκκινο χαρακτηρίζεται
+  Low, πράσινο αν είναι Medium και μπλε αν είναι High. Όσο πιο σίγουρο για την
+  πρόβλεψη της κατηγοριοποίησης, τόσο πιο έντονο το χρώμα του φύλλου.
+]
+
+=== Neural Network
