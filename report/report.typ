@@ -42,17 +42,18 @@
 #show heading.where(level: 1): set text(size: 20pt)
 #show heading.where(level: 2): set text(size: 18pt)
 #show heading.where(level: 3): set text(size: 16pt)
+#show heading.where(level: 4): set text(size: 16pt)
 
 #set text(size: 14pt)
 = Dataset
 
 == Περιγραφή dataset
 #par[
-  Χρησιμοποιήσαμε το MovieLens Dataset με 20 data entries. Το dataset χωρίζεται
-  σε 6 αρχεία csv με την στήλη movieId και userId να μοιράζονται μέσα στους
-  πίνακες. Τα αρχεία που  έχουν ένα movieId ξεκινάνε από το 1 και
-  ανεβαίνουν με μη σταθερό ρυθμό, αρχίζοντας να αυξάνονται κατά 1 και στην
-  συνέχεια αυξάνονται κατά τυχαίο αριθμό.
+  Χρησιμοποιήσαμε το MovieLens Dataset με 20 εκατομμύρια  data entries.
+  Το dataset χωρίζεται σε 6 αρχεία csv με την στήλη movieId και userId
+  να μοιράζονται μέσα στους πίνακες. Τα αρχεία που  έχουν ένα movieId
+  ξεκινάνε από το 1 και ανεβαίνουν με μη σταθερό ρυθμό, αρχίζοντας να
+  αυξάνονται κατά 1 και στην συνέχεια αυξάνονται κατά τυχαίο αριθμό.
 ]
 
 + *movie* #par[
@@ -110,7 +111,7 @@
 - Οι σχέσεις μεταξύ των πινάκων φαίνονται στην παρακάτω εικόνα \
 
 #align(center)[
-  #image("images/tablesER.png", width: 120%)
+  #image("images/tablesER.png", width: 100%)
 ]
 
 #pagebreak()
@@ -222,7 +223,7 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
 
 #par[
   Για Classification models χρησιμοποιήθηκε το Decision Tree και το Neural
-  Network. Για advance technique χρησιμοποιήθηκε [To be continued].
+  Network. Για advance technique χρησιμοποιήθηκε το Association Rules.
 ]
 
 == Classification Models
@@ -240,11 +241,10 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
   'Medium' για #ratingMid, \
   'High' για #ratingHigh.\
   Επομένως προσθέσαμε στον πίνακα την νέα στήλη rating_class. Στην συνέχεια
-  χρησιμοποιήσαμε το rating_class ως target του Decision Tree, κρύψαμε την μέση
-  αξιολόγηση κάθε ταινίας και (avg_movie_rating) και την απόκλιση των
-  αξιολογήσεων (rating_std). Επομένως, δημιουργήθηκε ένα Decision Tree που
+  χρησιμοποιήσαμε το rating_class ως target του Decision Tree και κρύψαμε την
+  μέση αξιολόγηση κάθε ταινίας. Επομένως, δημιουργήθηκε ένα Decision Tree που
   προσπαθεί να προβλέψει αν μια ταινία θα χαρακτηρίζεται ως Low, Medium ή High,
-  μόνο από τα genres, rating_count, genre_count και release_year.
+  μόνο από τα genres, rating_count, genre_count, release_year και rating_std.
 ]
 
 #align(center)[
@@ -279,6 +279,87 @@ rating. Καταλήξαμε με ένα αρχείο (Processed_Dataset.tab) π
   Associate. Περάσαμε τα genres από ένα python script που για κάθε είδος ταινίας
   που το περιέχει βάζει "yes". Στην συνέχεια εντοπίσαμε τους πιο συχνούς συνδυασμούς
   ειδών που υπήρχαν μεταξύ των ταινιών, για να δημιουργήσουμε κανόνες.
-  Δημιουργούνται κανόνες (association rules) μεταξύ των genres και εντοπίζει αυτά 
+  Δημιουργούνται κανόνες (association rules) μεταξύ των genres και εντοπίζει αυτά
   που έχουν περισσότερες κοινές ταινίες.
+]
+
+==== Παρατηρήσεις
+
+#par[
+  Αρχικά θέλαμε να φτιάξουμε ένα recommendation system, αλλά λόγω του όγκου του
+  Dataset ήταν δύσκολο να διαχειριστούμε όλα τα δεδομένα. Επομένως, επιλέξαμε να
+  χρησιμοποιήσουμε Association Rules.
+]
+
+== Big Data Approach
+
+=== Spark
+
+[Things here]
+
+= Model Evaluation
+
+#par[
+  Συγκρίναμε τις αποδόσεις των μοντέλων Decision Tree και Neural Network, με
+  βάση τα Accuracy, Precision/Recall, Confusion Matrix και ROC Curve. Το
+  Accuracy δείχνει τις σωστές κατηγοριοποίησης, το Precision μετράει τα false
+  alarms, το Recall πόσα δεν κατηγοριοποίησε σωστά, στο Confusion Matrix
+  φαίνονται οι διαφορές στην κατηγοριοποίηση που δόθηκε σε σχέση με την
+  πραγματική και στο ROC Curve δείχνει την αναλογία μεταξύ των false positive
+  και των true positive.
+]
+
+#align(center)[
+  #image("images/evaluationsTreeNeural.png", width: 40%)
+]
+
+#list[
+  Για το Decision Tree:
+  Το Accuracy (CA) είναι 66.8%, το Precision (Prec) 64.8% και το Recall 66.8%.
+
+]
+#list[
+  Για το Neural Network:
+  Το Accuracy (CA) είναι 67.8%, το Precision (Prec) 65.8% και το Recall 67.8%.
+]
+
+- Τα Confusion Matrix:
+
+#align(center)[
+  #grid(
+    columns: (2fr, 2fr),
+    column-gutter: 10pt,
+    image("images/confusionTree.png", width: 100%), image("images/confusionNeural.png", width: 106.2%),
+    text(style: "italic")[Decision Tree], text(style: "italic")[Neural Network],
+  )
+]
+
+#let toCyan(body) = text(fill: rgb("#2BFDBE"), body)
+#let toOrange(body) = text(fill: rgb("#FFA45F"), body)
+
+- Το ROC Curve για #toCyan[Decision Tree] και #toOrange[Neural Network]:
+
+  #align(center)[
+    #image("images/ROCComboLow.png", width: 85%)
+    #text(style: "italic", size: 10pt)[Low]
+    #image("images/ROCComboMedium.png", width: 85%)
+    #text(style: "italic", size: 10pt)[Medium]
+    #image("images/ROCComboHigh.png", width: 85%)
+    #text(style: "italic", size: 10pt)[High]
+  ]
+
+= Σύγκριση Μοντέλων
+
+#par[
+  Τα μοντέλα Decision Tree και Neural Network, είχαν σχεδόν ίδια αποτελέσματα σε
+  Accuracy, Precision και Recall, με το Neural Network να είναι 1% καλύτερο
+  σταθερά. Το Confusion Matrix στο Decision Tree δείχνει ότι ήταν ελάχιστα
+  χειρότερο στην κατηγοριοποίηση των High και Low, αλλά ελάχιστα καλύτερο στα
+  Medium, συγκριτικά με το Neural Network. Αυτό φαίνεται και στο ROC Curve που
+  δείχνει πως το Neural Network είναι πιο σταθερό, δηλαδή έχει πιο σταθερή αναλογία
+  μεταξύ των false positive και true positive.
+]
+#par[
+  Επομένως, τα μοντέλα είχαν κοντινή απόδοση για το dataset που δημιουργήσαμε,
+  με το Neural Network να είναι ελάχιστα πιο αποδοτικό.
 ]
